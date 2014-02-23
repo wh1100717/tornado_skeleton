@@ -17,8 +17,17 @@ server_port = 80
 #服务器配置
 server_config = {
     "static_path": __static_dir__,
-    "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
-    "login_url": "/login",
-    "xsrf_cookies": True,
+#    "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__", 
+#    "login_url": "/login",
+#    "xsrf_cookies": True,
     "debug": True,
+}
+
+#个推Push平台配置
+igetui_config = {
+	'APPKEY' : "请输入您的appkey"
+	'APPID' : "请输入您的appid"
+	'MASTERSECRET' : "请输入您的MASTERSECRET"
+	'CID' : "测试客户端的CID"
+	'HOST' : 'http://sdk.open.api.igexin.com/apiex.htm'
 }

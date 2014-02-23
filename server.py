@@ -3,13 +3,13 @@
 import tornado.ioloop
 import tornado.web
 import settings
-import controller
+import handler
 
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-application = tornado.web.Application(controller.handlers, **settings.server_config)
+application = tornado.web.Application(handler.handlers, **settings.server_config)
 
 if __name__ == "__main__":
     application.listen(settings.server_port)

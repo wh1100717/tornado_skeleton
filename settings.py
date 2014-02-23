@@ -25,9 +25,9 @@ server_config = {
 
 #个推Push平台配置
 igetui_config = {
-	'APPKEY' : "请输入您的appkey"
-	'APPID' : "请输入您的appid"
-	'MASTERSECRET' : "请输入您的MASTERSECRET"
-	'CID' : "测试客户端的CID"
-	'HOST' : 'http://sdk.open.api.igexin.com/apiex.htm'
+	'APPKEY' : "请输入您的appkey",
+	'APPID' : "请输入您的appid",
+	'MASTERSECRET' : "请输入您的MASTERSECRET",
+	'CID' : "测试客户端的CID",
+	'HOST' : 'http://sdk.open.api.igexin.com/apiex.htm',
 }

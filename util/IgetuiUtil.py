@@ -19,6 +19,7 @@ APPID = igetui_config['APPID']
 MASTERSECRET = igetui_config['MASTERSECRET']
 CID = igetui_config['CID']
 HOST = igetui_config['HOST']
+CALLBACK_URL = igetui_config['CALLBACK_URL']
 
 def pushMessageToSingle(
         template = NotificationTemplate(),
@@ -213,6 +214,41 @@ def generateLinkTemplate(
     template.isVibrate = isVibrate
     template.isClearable = isClearable
     return template
+
+def getPushResult(
+        appKey = APPKEY,
+        masterSecret = MASTERSECRET,
+        callback_url = CALLBACK_URL,
+        taskId = ""):
+    '''
+    ##获取推送结果
+    *   appKey: 应用appKey
+    *   callback_url: 在个推平台上创建应用的时候填写的回传地址
+    *   masterSecret: push平台每个应用省城的masterSecret序列号
+    *   taskId: 执行push请求后获取的taskId
+    '''
+    params = {}
+    params["action"] = "getPushMsgResult"
+    params["appkey"] = appKey
+    params["taskId"] = taskId
+
+    #createSign
+    sign = masterSecret
+    for (k,v) in params.items():
+        sign = sign+k+v
+    sign = hashlib.md5(sign).hexdigest()
+
+    params["sign"] = sign
+
+    #httpPost
+    data_json = json.dumps(params)
+    req = urllib2.Request(url, data_json)
+    res_stream = urllib2.urlopen(req, timeout = 60)
+    page_str = res_stream.read()
+    rep = eval(page_str)
+    
+    return rep
+
 
 
 

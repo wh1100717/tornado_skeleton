@@ -29,7 +29,8 @@ igetui_config = {
 	'APPID' : "请输入您的appid",
 	'MASTERSECRET' : "请输入您的MASTERSECRET",
 	'CID' : "测试客户端的CID",
-	'HOST' : 'http://sdk.open.api.igexin.com/apiex.htm',
+	'HOST' : "http://sdk.open.api.igexin.com/apiex.htm",
+	'CALLBACK_URL' : "",
 }
 
 #MongoDB配置

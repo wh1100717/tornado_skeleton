@@ -13,12 +13,15 @@ from igetui.igt_message import *
 from igetui.igt_target import *
 from igetui.template import *
 
+import hashlib
+import urllib, urllib2, json
+
+
 APPKEY = "请输入您的appkey"
 APPID = "请输入您的appid"
 MASTERSECRET = "请输入您的MASTERSECRET"
 CID = "请输入您的CID"
 HOST = 'http://sdk.open.api.igexin.com/apiex.htm'
-
 
 def pushMessageToSingle():
 
@@ -50,6 +53,7 @@ def pushMessageToSingle():
 
     ret = push.pushMessageToSingle(message, target)
     print ret
+    return ret
 
 
 def pushMessageToList():
@@ -87,6 +91,7 @@ def pushMessageToList():
     contentId = push.getContentId(message)
     ret = push.pushMessageToList(contentId, targets)
     print ret
+    return ret
 
 
 def pushMessageToApp():
@@ -110,11 +115,42 @@ def pushMessageToApp():
 
     ret = push.pushMessageToApp(message)
     print ret
+    return ret
 
+def getPushResult(url,appKey,masterSecret,taskId):
+    params = {}
+    params["action"] = "getPushMsgResult"
+    params["appkey"] = appKey
+    params["taskId"] = taskId
+    sign = createSign(params,masterSecret)
+    params["sign"] = sign
+    rep = httpPost(url,params)
+    print rep
+    return rep
 
-#pushMessageToSingle()
-#pushMessageToList()
-pushMessageToApp()
+def createSign(params,masterSecret):
+    sign = masterSecret
+    for (k,v) in params.items():
+        sign = sign+k+v
+    return hashlib.md5(sign).hexdigest()
+def httpPost(url, params):
+    data_json = json.dumps(params)
+    req = urllib2.Request(url, data_json)
+    res_stream = urllib2.urlopen(req, timeout = 60)
+    page_str = res_stream.read()
+    page_dict = eval(page_str)
+    return page_dict
+
+result = pushMessageToSingle()
+getPushResult(HOST, APPKEY, MASTERSECRET, result['taskId'])
+
+result_list = pushMessageToList()
+
+getPushResult("http://sdk.open.api.igexin.com/api.htm", APPKEY, MASTERSECRET, result_list['contentId'])
+
+result_app = pushMessageToApp()
+
+getPushResult("http://sdk.open.api.igexin.com/api.htm", APPKEY, MASTERSECRET, result_app['contentId'])
 
 
 

@@ -16,11 +16,11 @@ server_port = 80
 
 #服务器配置
 server_config = {
-    "static_path": __static_dir__,
-#    "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__", 
-#    "login_url": "/login",
-#    "xsrf_cookies": True,
-    "debug": True,
+	"static_path": __static_dir__,
+	"cookie_secret": "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=", 
+	"login_url": "/login",
+	"xsrf_cookies": True,
+	"debug": True,
 }
 
 #个推Push平台配置
@@ -30,4 +30,11 @@ igetui_config = {
 	'MASTERSECRET' : "请输入您的MASTERSECRET",
 	'CID' : "测试客户端的CID",
 	'HOST' : 'http://sdk.open.api.igexin.com/apiex.htm',
+}
+
+#MongoDB配置
+mongo_config = {
+	'host' : "localhost",
+	'port' : 27017,
+	'db_name' : "tongtang"
 }
